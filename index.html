@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Server Deleted</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Font Awesome Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Courier New', monospace;
+}
+body{
+    background:black;
+    color:#00ffcc;
+    overflow:hidden;
+}
+
+/* Matrix Background */
+canvas{
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:-1;
+}
+
+/* Main Content */
+.container{
+    text-align:center;
+    margin-top:18vh;
+    padding:20px;
+}
+
+h1{
+    font-size:2rem;
+    color:#ff4444;
+    text-shadow:0 0 12px red;
+}
+
+.counter{
+    margin-top:20px;
+    font-size:1.3rem;
+    color:#00ffcc;
+}
+
+/* Social Icons */
+.icons{
+    margin-top:35px;
+}
+
+.icons a{
+    color:#00ffcc;
+    font-size:2.6rem;
+    margin:0 18px;
+    transition:0.3s;
+}
+
+.icons a:hover{
+    color:#ffffff;
+    text-shadow:0 0 18px #00ffcc;
+}
+
+/* Footer */
+footer{
+    position:fixed;
+    bottom:10px;
+    width:100%;
+    text-align:center;
+    font-size:0.9rem;
+    color:#aaa;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="matrix"></canvas>
+
+<div class="container">
+    <h1>Your server for Momina Umair<br>is deleted successfully</h1>
+
+    <div class="counter">
+        <span id="servers">1000</span> servers left
+    </div>
+
+    <div class="icons">
+        <!-- WhatsApp -->
+        <a href="https://wa.me/923463084191" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+
+        <!-- Instagram -->
+        <a href="https://instagram.com/mas17264" target="_blank">
+            <i class="fab fa-instagram"></i>
+        </a>
+    </div>
+</div>
+
+<footer>
+    Server details by <b>ABDULLAH SULEMAN</b>
+</footer>
+
+<!-- Background Music -->
+<audio autoplay loop>
+    <source src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Monplaisir/Monplaisir_-_08_-_Dark_Computer.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+/* Server Counter */
+let count = 1000;
+setInterval(()=>{
+    if(count>0){
+        count--;
+        document.getElementById("servers").innerText = count;
+    }
+},200);
+
+/* Matrix Effect */
+const canvas = document.getElementById("matrix");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const letters = "01";
+const fontSize = 16;
+const columns = canvas.width / fontSize;
+const drops = [];
+
+for(let i=0;i<columns;i++){
+    drops[i]=1;
+}
+
+function draw(){
+    ctx.fillStyle="rgba(0,0,0,0.05)";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+
+    ctx.fillStyle="#00ffcc";
+    ctx.font=fontSize+"px monospace";
+
+    for(let i=0;i<drops.length;i++){
+        const text = letters[Math.floor(Math.random()*letters.length)];
+        ctx.fillText(text,i*fontSize,drops[i]*fontSize);
+
+        if(drops[i]*fontSize>canvas.height && Math.random()>0.975){
+            drops[i]=0;
+        }
+        drops[i]++;
+    }
+}
+setInterval(draw,33);
+</script>
+
+</body>
+  </html>
